@@ -1,0 +1,9 @@
+Callsign: LB5QG
+Contest: k
+Category: k
+Claimed Score: 116
+Email-address: k
+Name: k
+Address: k
+Soapbox: k
+QSO: 15 R 2014-sep-16 2107 30 LA1K 7 Per N {4 point -1 doubloon for LB5QG}

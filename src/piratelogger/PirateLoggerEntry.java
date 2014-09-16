@@ -28,6 +28,7 @@ public class PirateLoggerEntry {
     public PirateLoggerEntry(String myCallsign, String myName, int band, boolean running, Timestamp tidspunkt, int myDoubloons, String theirCallsign, int theirDoubloons, String theirName, boolean plank, boolean dupe) {
         this.myCallsign = myCallsign;
         this.myName = myName;
+        securify(myName);
         this.band = band;
         this.running = running;
         this.tidspunkt = tidspunkt;
@@ -35,10 +36,15 @@ public class PirateLoggerEntry {
         this.theirCallsign = theirCallsign;
         this.theirDoubloons = theirDoubloons;
         this.theirName = theirName;
+        securify(theirName);
         this.plank = plank;
         this.dupe = dupe;
     }
 
+    public static void securify(String s){
+        s.replace(' ', '_');
+    }
+    
     /**
      * @return the myCallsign
      */
@@ -65,6 +71,7 @@ public class PirateLoggerEntry {
      */
     public void setMyName(String myName) {
         this.myName = myName;
+        securify(this.myName);
     }
 
     /**
@@ -163,6 +170,7 @@ public class PirateLoggerEntry {
      */
     public void setTheirName(String theirName) {
         this.theirName = theirName;
+        securify(this.theirName);
     }
 
     /**
