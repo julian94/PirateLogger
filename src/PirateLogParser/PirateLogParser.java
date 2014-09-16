@@ -9,6 +9,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  *
@@ -16,19 +18,17 @@ import java.util.ArrayList;
  */
 public class PirateLogParser {
 
-    private ArrayList<PirateLog> runners;
-    private ArrayList<PirateLog> stalkers;
-    private ArrayList<Pirate> pirates;
+    private static ArrayList<PirateLog> runners;
+    private static ArrayList<PirateLog> stalkers;
+    private static ArrayList<Pirate> pirates;
 
     public static void main(String[] args) {
-
+        readLogs();
+        deDupe();
+        compare();
     }
 
-    private void deDuping() {
-        
-    }
-
-    private void readLogs() {
+    private static void readLogs() {
         File log = new File("\\logs\\");
         File[] logs = log.listFiles();
         int lognr = logs.length;
@@ -58,6 +58,33 @@ public class PirateLogParser {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    private static void deDupe() {
+        Set setItems = new LinkedHashSet(runners);
+        runners.clear();
+        runners.addAll(setItems);
+
+        setItems = new LinkedHashSet(stalkers);
+        stalkers.clear();
+        stalkers.addAll(setItems);
+
+        setItems = new LinkedHashSet(pirates);
+        pirates.clear();
+        pirates.addAll(setItems);
+    }
+
+    private static void compare() {
+        for (PirateLog r : runners) {
+            for (PirateLog s : stalkers) {
+                if (r.compare(s)) {
+                    if (r.isTeam()){
+                        
+                    }
+                    break;
+                }
             }
         }
     }

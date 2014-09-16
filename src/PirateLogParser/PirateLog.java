@@ -18,6 +18,7 @@ public class PirateLog {
     private boolean plank;
     private boolean checked = false;
     private boolean confirmed = false;
+    private boolean team;
 
     public PirateLog(String aCall, String bCall, int band, boolean running, boolean plank) {
         this.aCall = aCall;
@@ -25,6 +26,27 @@ public class PirateLog {
         this.band = band;
         this.running = running;
         this.plank = plank;
+        
+        
+        boolean aRed = false;
+        for (int i = 0; i < aCall.length(); i++) {
+            if (aCall.charAt(i) <= '9' && aCall.charAt(i) >= '0') {
+                if ((aCall.charAt(i + 1) <= 'm' && aCall.charAt(i + 1) >= 'a') || (aCall.charAt(i + 1) <= 'M' && aCall.charAt(i + 1) >= 'A')) {
+                    aRed = true;
+                }
+
+            }
+        }
+        boolean bRed = false;
+        for (int i = 0; i < bCall.length(); i++) {
+            if (bCall.charAt(i) <= '9' && bCall.charAt(i) >= '0') {
+                if ((bCall.charAt(i + 1) <= 'm' && bCall.charAt(i + 1) >= 'a') || (bCall.charAt(i + 1) <= 'M' && bCall.charAt(i + 1) >= 'A')) {
+                    bRed = true;
+                }
+
+            }
+        }
+        team = aRed == bRed;
     }
 
     /**
@@ -124,6 +146,10 @@ public class PirateLog {
     public void setConfirmed(boolean confirmed) {
         this.confirmed = confirmed;
     }
+    
+    public boolean equals(PirateLog other){
+        return (other.isRunning() == running && other.getBand() == band && aCall.equals(other.getaCall()) && bCall.equals(other.getbCall()) && other.isPlank() == plank);
+    }
 
     public boolean compare(PirateLog other) {
         if (other.isRunning() != running && other.getBand() == band && other.getaCall().equals(bCall) && other.getbCall().equals(aCall) && other.isPlank() == plank) {
@@ -133,5 +159,19 @@ public class PirateLog {
         } else {
             return false;
         }
+    }
+
+    /**
+     * @return the team
+     */
+    public boolean isTeam() {
+        return team;
+    }
+
+    /**
+     * @param team the team to set
+     */
+    public void setTeam(boolean team) {
+        this.team = team;
     }
 }
