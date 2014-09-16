@@ -540,7 +540,7 @@ public class PirateLoggerGUI extends javax.swing.JFrame {
         } else {
             band = 40;
         }
-        boolean running = jComboBox1.getSelectedIndex() == 0;
+        boolean running = jComboBox2.getSelectedIndex() == 0;
         Timestamp tidspunkt = new Timestamp(System.currentTimeMillis());
         int myDoubloons = Integer.parseInt(jLabel7.getText());
         String theirCallsign = jTextField1.getText();
@@ -725,7 +725,7 @@ public class PirateLoggerGUI extends javax.swing.JFrame {
         } else {
             current.setBand(40);
         }
-        current.setRunning(jComboBox1.getSelectedIndex() == 0);
+        current.setRunning(jComboBox2.getSelectedIndex() == 0);
         current.setTheirCallsign(jTextField1.getText());
         current.setTheirDoubloons(Integer.parseInt(jTextField3.getText()));
         current.setTheirName(jTextField2.getText());
