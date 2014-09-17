@@ -4,6 +4,7 @@
 package piratelogger;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class PirateLogger {
      */
     private static ArrayList<PirateLoggerEntry> log;
     private static String[] finalInfo;
+    private static int counter = 0;
 
     public static void main(String[] args) {
         log = new ArrayList<PirateLoggerEntry>();
@@ -30,11 +32,11 @@ public class PirateLogger {
         log.add(e);
         storeLog();
     }
-    
-    public static PirateLoggerEntry getEntry(int i){
+
+    public static PirateLoggerEntry getEntry(int i) {
         return log.get(i);
     }
-    
+
     public static void removeEntry(int i) {
         log.remove(i);
     }
@@ -42,7 +44,7 @@ public class PirateLogger {
     public static ArrayList<PirateLoggerEntry> getEntries() {
         return log;
     }
-    
+
     public static void prettify(String[] input) {
         finalInfo = input;
         storeLog();
@@ -50,7 +52,22 @@ public class PirateLogger {
 
     private static boolean storeLog() {
         try {
-            String fileName = "PirateLog_2014_" +log.get(0).getMyCallsign() + ".txt";
+            String fileName = "PirateLog_2014_" + log.get(0).getMyCallsign();
+            if (counter == 0) {
+                try {
+                    File f = new File(fileName);
+                    if (f.exists() && !f.isDirectory()) {
+                        while (f.exists()) {
+                            counter++;
+                            f = new File(fileName + "_" + counter);
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            fileName += counter == 0 ? "" : "_" + counter;
+            fileName += ".txt";
             FileWriter fileWriter = new FileWriter(fileName);
             PrintWriter printWriter = new PrintWriter(new BufferedWriter(fileWriter));
             printWriter.println("Callsign: " + log.get(0).getMyCallsign());
@@ -61,12 +78,13 @@ public class PirateLogger {
             printWriter.println("Name: " + finalInfo[4]);
             printWriter.println("Address: " + finalInfo[5]);
             printWriter.println("Soapbox: " + finalInfo[6]);
-            for(PirateLoggerEntry entry: log) {
+            for (PirateLoggerEntry entry : log) {
                 printWriter.println(entry.toLog());
             }
             printWriter.close();
 
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
         return true;
