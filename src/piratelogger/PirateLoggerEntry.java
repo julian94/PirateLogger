@@ -42,7 +42,7 @@ public class PirateLoggerEntry {
     }
 
     public static void securify(String s){
-        s.replace(' ', '_');
+        s.replaceAll("\\s","");
     }
     
     /**

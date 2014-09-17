@@ -1,0 +1,10 @@
+Callsign: LB5QG
+Contest: w
+Category: ww
+Claimed Score: 145
+Email-address: w
+Name: w
+Address: w
+Soapbox: w
+QSO: 15 R 2014-sep-17 0744 30 LB4RT -1 Kalle N {1 point for LB5QG}
+QSO: 15 R 2014-sep-17 0744 30 LA2FS 7 A B C N {4 point -1 doubloon for LB5QG}

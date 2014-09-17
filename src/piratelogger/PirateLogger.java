@@ -55,11 +55,11 @@ public class PirateLogger {
             String fileName = "PirateLog_2014_" + log.get(0).getMyCallsign();
             if (counter == 0) {
                 try {
-                    File f = new File(fileName);
+                    File f = new File(fileName + ".txt");
                     if (f.exists() && !f.isDirectory()) {
                         while (f.exists()) {
                             counter++;
-                            f = new File(fileName + "_" + counter);
+                            f = new File(fileName + "_" + counter + ".txt");
                         }
                     } else {
                         counter = -1;

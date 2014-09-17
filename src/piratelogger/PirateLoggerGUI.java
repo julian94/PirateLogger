@@ -94,6 +94,18 @@ public class PirateLoggerGUI extends javax.swing.JFrame {
 
         jLabel1.setText("Contest");
 
+        jTextField6.setText(" ");
+
+        jTextField7.setText(" ");
+
+        jTextField8.setText(" ");
+
+        jTextField9.setText(" ");
+
+        jTextField10.setText(" ");
+
+        jTextField11.setText(" ");
+
         jLabel2.setText("Category");
 
         jLabel12.setText("Email");
@@ -517,7 +529,7 @@ public class PirateLoggerGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -675,6 +687,7 @@ public class PirateLoggerGUI extends javax.swing.JFrame {
         input[5] = jTextField10.getText();
         input[6] = jTextField11.getText();
         PirateLogger.prettify(input);
+        jFrame1.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
