@@ -544,7 +544,12 @@ public class PirateLoggerGUI extends javax.swing.JFrame {
         Timestamp tidspunkt = new Timestamp(System.currentTimeMillis());
         int myDoubloons = Integer.parseInt(jLabel7.getText());
         String theirCallsign = jTextField1.getText();
-        int theirDoubloons = Integer.parseInt(jTextField3.getText());
+        int theirDoubloons = -1;
+        try {
+            theirDoubloons = Integer.parseInt(jTextField3.getText());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String theirName = jTextField2.getText();
         boolean plank = jCheckBox1.isSelected();
 
@@ -727,7 +732,11 @@ public class PirateLoggerGUI extends javax.swing.JFrame {
         }
         current.setRunning(jComboBox2.getSelectedIndex() == 0);
         current.setTheirCallsign(jTextField1.getText());
-        current.setTheirDoubloons(Integer.parseInt(jTextField3.getText()));
+        try {
+            current.setTheirDoubloons(Integer.parseInt(jTextField3.getText()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         current.setTheirName(jTextField2.getText());
         current.setPlank(jCheckBox1.isSelected());
         jPanel1.setVisible(false);
