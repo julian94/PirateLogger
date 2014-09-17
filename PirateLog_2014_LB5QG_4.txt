@@ -1,0 +1,11 @@
+Callsign: LB5QG
+Contest: Pirate contest 
+Category: SO HP 
+Claimed Score: 261
+Email-address: langlo94@gmail.com 
+Name: Julian 
+Address: Trd 
+Soapbox: Hallo 
+QSO: 15 R 2014-sep-17 0956 30 LA1K 18 Per N {4 point -1 doubloon for LB5QG}
+QSO: 20 S 2014-sep-17 0956 28 L5GT 7 Lars N {1 point 1 doubloon for LB5QG}
+QSO: 15 R 2014-sep-17 0957 29 LA1K 17 Per N
