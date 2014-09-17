@@ -26,6 +26,7 @@ public class PirateLoggerGUI extends javax.swing.JFrame {
         jLabel7.setText("30");
         jLabel8.setText("0");
         jPanel1.setVisible(false);
+        jPanel3.getRootPane().setDefaultButton(jButton1);
     }
 
     private PirateLoggerEntry current;
@@ -529,7 +530,7 @@ public class PirateLoggerGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -542,87 +543,102 @@ public class PirateLoggerGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String myCallsign = jTextField4.getText();
-        String myName = jTextField5.getText();
-        int band = 0;
-        if (jComboBox1.getSelectedIndex() == 0) {
-            band = 15;
-        } else if (jComboBox1.getSelectedIndex() == 1) {
-            band = 20;
+        jTextField1.requestFocus();
+        if (null != current) {
+            String[] input = new String[7];
+            input[0] = jTextField6.getText();
+            input[1] = jTextField7.getText();
+            input[2] = jLabel6.getText();
+            input[3] = jTextField8.getText();
+            input[4] = jTextField9.getText();
+            input[5] = jTextField10.getText();
+            input[6] = jTextField11.getText();
+            PirateLogger.prettify(input);
+            jFrame1.setVisible(false);
+
         } else {
-            band = 40;
-        }
-        boolean running = jComboBox2.getSelectedIndex() == 0;
-        Timestamp tidspunkt = new Timestamp(System.currentTimeMillis());
-        int myDoubloons = Integer.parseInt(jLabel7.getText());
-        String theirCallsign = jTextField1.getText();
-        int theirDoubloons = -1;
-        try {
-            theirDoubloons = Integer.parseInt(jTextField3.getText());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        String theirName = jTextField2.getText();
-        boolean plank = jCheckBox1.isSelected();
-
-        boolean dupe = false;
-        for (PirateLoggerEntry p : PirateLogger.getEntries()) {
-            if (theirCallsign.equals(p.getTheirCallsign()) && p.getBand() == band) {
-                dupe = true;
-                showMessageDialog(null, "You WONT get any points for this!");
-                break;
-            }
-        }
-
-        PirateLoggerEntry p = new PirateLoggerEntry(myCallsign, myName, band, running, tidspunkt, myDoubloons, theirCallsign, theirDoubloons, theirName, plank, dupe);
-        PirateLogger.addEntry(p);
-        updateList();
-        jTextField1.setText("");
-        jTextField2.setText("");
-        jTextField3.setText("");
-        jCheckBox1.setSelected(false);
-
-        if (!dupe) {
-            boolean selfRed = false;
-            for (int i = 0; i < myCallsign.length(); i++) {
-                if (myCallsign.charAt(i) <= '9' && myCallsign.charAt(i) >= '0') {
-                    if ((myCallsign.charAt(i + 1) <= 'm' && myCallsign.charAt(i + 1) >= 'a') || (myCallsign.charAt(i + 1) <= 'M' && myCallsign.charAt(i + 1) >= 'A')) {
-                        selfRed = true;
-                    }
-
-                }
-            }
-            boolean otherRed = false;
-            for (int i = 0; i < theirCallsign.length(); i++) {
-                if (theirCallsign.charAt(i) <= '9' && theirCallsign.charAt(i) >= '0') {
-                    if ((theirCallsign.charAt(i + 1) <= 'm' && theirCallsign.charAt(i + 1) >= 'a') || (theirCallsign.charAt(i + 1) <= 'M' && theirCallsign.charAt(i + 1) >= 'A')) {
-                        otherRed = true;
-                    }
-
-                }
-            }
-            int points = Integer.parseInt(jLabel8.getText());
-            if (jComboBox2.getSelectedIndex() == 0) {
-                if (selfRed == otherRed) {
-                    points += 1;
-                } else {
-                    points += 4;
-                    myDoubloons -= 1;
-                }
+            String myCallsign = jTextField4.getText();
+            String myName = jTextField5.getText();
+            int band = 0;
+            if (jComboBox1.getSelectedIndex() == 0) {
+                band = 15;
+            } else if (jComboBox1.getSelectedIndex() == 1) {
+                band = 20;
             } else {
-                if (selfRed == otherRed) {
-                    points += 1;
-                } else {
-                    points += 1;
-                    myDoubloons += 1;
+                band = 40;
+            }
+            boolean running = jComboBox2.getSelectedIndex() == 0;
+            Timestamp tidspunkt = new Timestamp(System.currentTimeMillis());
+            int myDoubloons = Integer.parseInt(jLabel7.getText());
+            String theirCallsign = jTextField1.getText();
+            int theirDoubloons = -1;
+            try {
+                theirDoubloons = Integer.parseInt(jTextField3.getText());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            String theirName = jTextField2.getText();
+            boolean plank = jCheckBox1.isSelected();
+
+            boolean dupe = false;
+            for (PirateLoggerEntry p : PirateLogger.getEntries()) {
+                if (theirCallsign.equals(p.getTheirCallsign()) && p.getBand() == band) {
+                    dupe = true;
+                    showMessageDialog(null, "You WONT get any points for this!");
+                    break;
                 }
             }
-            if (plank) {
-                myDoubloons += jComboBox2.getSelectedIndex() == 0 ? 2 : -2;
+
+            PirateLoggerEntry p = new PirateLoggerEntry(myCallsign, myName, band, running, tidspunkt, myDoubloons, theirCallsign, theirDoubloons, theirName, plank, dupe);
+            PirateLogger.addEntry(p);
+            updateList();
+            jTextField1.setText("");
+            jTextField2.setText("");
+            jTextField3.setText("");
+            jCheckBox1.setSelected(false);
+
+            if (!dupe) {
+                boolean selfRed = false;
+                for (int i = 0; i < myCallsign.length(); i++) {
+                    if (myCallsign.charAt(i) <= '9' && myCallsign.charAt(i) >= '0') {
+                        if ((myCallsign.charAt(i + 1) <= 'm' && myCallsign.charAt(i + 1) >= 'a') || (myCallsign.charAt(i + 1) <= 'M' && myCallsign.charAt(i + 1) >= 'A')) {
+                            selfRed = true;
+                        }
+
+                    }
+                }
+                boolean otherRed = false;
+                for (int i = 0; i < theirCallsign.length(); i++) {
+                    if (theirCallsign.charAt(i) <= '9' && theirCallsign.charAt(i) >= '0') {
+                        if ((theirCallsign.charAt(i + 1) <= 'm' && theirCallsign.charAt(i + 1) >= 'a') || (theirCallsign.charAt(i + 1) <= 'M' && theirCallsign.charAt(i + 1) >= 'A')) {
+                            otherRed = true;
+                        }
+
+                    }
+                }
+                int points = Integer.parseInt(jLabel8.getText());
+                if (jComboBox2.getSelectedIndex() == 0) {
+                    if (selfRed == otherRed) {
+                        points += 1;
+                    } else {
+                        points += 4;
+                        myDoubloons -= 1;
+                    }
+                } else {
+                    if (selfRed == otherRed) {
+                        points += 1;
+                    } else {
+                        points += 1;
+                        myDoubloons += 1;
+                    }
+                }
+                if (plank) {
+                    myDoubloons += jComboBox2.getSelectedIndex() == 0 ? 2 : -2;
+                }
+                jLabel6.setText(Integer.toString(points * myDoubloons));
+                jLabel7.setText(Integer.toString(myDoubloons));
+                jLabel8.setText(Integer.toString(points));
             }
-            jLabel6.setText(Integer.toString(points * myDoubloons));
-            jLabel7.setText(Integer.toString(myDoubloons));
-            jLabel8.setText(Integer.toString(points));
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
