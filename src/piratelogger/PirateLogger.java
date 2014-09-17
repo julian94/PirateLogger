@@ -61,6 +61,8 @@ public class PirateLogger {
                             counter++;
                             f = new File(fileName + "_" + counter);
                         }
+                    } else {
+                        counter = -1;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
