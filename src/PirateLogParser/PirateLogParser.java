@@ -50,10 +50,17 @@ public class PirateLogParser {
                     if (!stringList[0].equals("QSO:")) {
                         break;
                     }
+                    boolean plank = false;
+                    for (int i = 0; i < stringList.length; i++) {
+                        if (stringList[i].equals("Y")) {
+                            plank = true;
+                            break;
+                        }
+                    }
                     if (stringList[2].equals("R")) {
-                        runners.add(new PirateLog(p.getCall(), stringList[6], Integer.parseInt(stringList[1]), true, stringList[9].equals("Y")));
+                        runners.add(new PirateLog(p.getCall(), stringList[6], Integer.parseInt(stringList[1]), true, plank));
                     } else {
-                        stalkers.add(new PirateLog(stringList[6], p.getCall(), Integer.parseInt(stringList[1]), false, stringList[9].equals("Y")));
+                        stalkers.add(new PirateLog(stringList[6], p.getCall(), Integer.parseInt(stringList[1]), false, plank));
                     }
                 }
             } catch (Exception e) {
